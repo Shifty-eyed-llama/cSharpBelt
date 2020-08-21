@@ -1,0 +1,52 @@
+@using cSharpBelt.Models;
+@model NewHappeningWrap;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Event</title>
+</head>
+<body>
+    <h1>Hey @Model.UserThis.FirstName, Lets Add an Event</h1>
+        <div class="container">
+        <p><a href="/dashboard">Dashboard</a></p>
+        <p><a href="/logout">Log Out</a></p>
+        <form asp-action="CreateHap" method="post">
+            <span asp-validation-for="@Model.NewHappening.HappeningTitle"></span>
+            <br>
+            <label asp-for="@Model.NewHappening.HappeningTitle"></label>
+            <input asp-for="@Model.NewHappening.HappeningTitle">
+            <br>
+            <span asp-validation-for="@Model.NewHappening.HappeningDay"></span>
+            <br>
+            <label asp-for="@Model.NewHappening.HappeningDay"></label>
+            <input asp-for="@Model.NewHappening.HappeningDay">
+            <br>
+            <span asp-validation-for="@Model.NewHappening.HappeningTime"></span>
+            <br>
+            <label asp-for="@Model.NewHappening.HappeningTime"></label>
+            <input asp-for="@Model.NewHappening.HappeningTime">
+            <br>
+            <span asp-validation-for="@Model.NewHappening.Duration"></span>
+            <br>
+            <label asp-for="@Model.NewHappening.Duration"></label>
+            <input asp-for="@Model.NewHappening.Duration">
+            <select asp-for="@Model.NewHappening.Length">
+                <option value="Minutes">Minutes</option>
+                <option value="Hours">Hours</option>
+                <option value="Days">Days</option>
+            </select>
+            <br>
+            <br>
+            <span asp-validation-for="@Model.NewHappening.Description"></span>
+            <label for="Description">Description: </label>
+            <br>
+            @Html.TextAreaFor(m => m.NewHappening.Description)
+            <input type="hidden" asp-for="NewHappening.UserID" value="@Model.UserThis.UserID">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

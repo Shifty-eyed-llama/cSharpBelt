@@ -1,0 +1,56 @@
+@using cSharpBelt.Models;
+@model DashWrapper;
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Welcome to the Dojo Activity Center, @Model.UserThis.FirstName</h1>
+    <p><a href="/logout">Log Out</a></p>
+
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Activity</th>
+                    <th>Date and Time</th>
+                    <th>Duration</th>
+                    <th>Event Coordinator</th>
+                    <th>No. Attending</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var hap in Model.AllHappening)
+                {
+                    <tr>
+                        <td><a href="/view/happening/@hap.HappeningID">@hap.HappeningTitle</a></td>
+                        <td>@hap.HappeningDay.ToString("ddd, MM/d") @@ @hap.HappeningTime.ToString("HH:mm") </td>
+                        <td>@hap.Duration @hap.Length</td>
+                        <td>@hap.UserCreator.FirstName @hap.UserCreator.LastName</td>
+                        <td>@hap.GuestsAttending.Count</td>
+                        @if(@hap.UserCreator.UserID == @Model.UserThis.UserID)
+                        {
+                            <td><a href="/delete/happening/@hap.HappeningID">Delete</a></td>
+                        }
+                        @if (@Model.UserThis.HappeningsAttending.Any(p => p.HappeningID == hap.HappeningID))
+                        {
+                            <td><a href="/unrsvp/happening/@hap.HappeningID">Dude, bummer</a></td>
+                        }
+                        else
+                        {
+                            <td><a href="/rsvp/happening/@hap.HappeningID">LETS GO!</a></td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <h4>Lets <a href="/addhappening">Add a New Event</a></h4>
+    </div>
+</body>
+</html>

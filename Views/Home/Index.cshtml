@@ -1,0 +1,76 @@
+@using cSharpBelt.Models;
+@model LogRegWrapper;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Please Login or Register to continue</h1>
+        <div class="register">
+            <h1>New User Register</h1>
+                <form asp-action="CreateUser" method="post">
+
+                <span asp-validation-for="NewUser.FirstName"></span>
+                <br>
+
+                <label asp-for="NewUser.FirstName"></label>
+                <input asp-for="NewUser.FirstName">
+                <br>
+
+                <span asp-validation-for="NewUser.LastName"></span>
+                <br>
+
+                <label asp-for="NewUser.LastName"></label>
+                <input asp-for="NewUser.LastName">
+                <br>
+
+
+                <span asp-validation-for="NewUser.Email"></span>
+                <br>
+
+                <label asp-for="NewUser.Email"></label>
+                <input asp-for="NewUser.Email">
+                <br>
+
+                <span asp-validation-for="NewUser.Password"></span>
+                <br>
+
+                <label asp-for="NewUser.Password"></label>
+                <input asp-for="NewUser.Password">
+                <br>
+
+                <span asp-validation-for="NewUser.Confirm"></span>
+                <br>
+
+                <label asp-for="NewUser.Confirm"></label>
+                <input asp-for="NewUser.Confirm">
+                <br>
+
+                <button type="submit">Submit</button>
+
+            </form>
+        </div>
+        <div class="login">
+            <h1>Login</h1>
+            <form asp-action="Verify" method="post">
+                <span asp-validation-for="LoginUser.Email"></span>
+                <br>
+                <label asp-for="LoginUser.Email"></label>
+                <input asp-for="LoginUser.Email">
+                <br>
+                <span asp-validation-for="LoginUser.Password"></span>
+                <br>
+                <label asp-for="LoginUser.Password"></label>
+                <input asp-for="LoginUser.Password">
+                <br>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

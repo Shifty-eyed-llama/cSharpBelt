@@ -1,0 +1,40 @@
+@using cSharpBelt.Models;
+@model NewHappeningWrap;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Model.NewHappening.HappeningTitle</title>
+</head>
+<body>
+    <div class="container">
+        <h1>@Model.NewHappening.HappeningTitle</h1>
+         @if(@Model.NewHappening.UserCreator.UserID == @Model.UserThis.UserID)
+        {
+            <td><a href="/delete/happening/@Model.NewHappening.HappeningID">Delete</a></td>
+        }
+        @if (@Model.UserThis.HappeningsAttending.Any(p => p.HappeningID == @Model.NewHappening.HappeningID))
+        {
+            <td><a href="/unrsvp/happening/@Model.NewHappening.HappeningID">Dude, bummer</a></td>
+        }
+        else
+        {
+            <td><a href="/rsvp/happening/@Model.NewHappening.HappeningID">LETS GO!</a></td>
+        }
+        <h4>Event Coordinator: @Model.NewHappening.UserCreator.FirstName @Model.NewHappening.UserCreator.LastName</h4>
+        <h4>Description:</h4>
+        <p>@Model.NewHappening.Description</p>
+        <h4>Expected to Start: @Model.NewHappening.HappeningTime</h4>
+        <h4>Expected to Last: @Model.NewHappening.Duration @Model.NewHappening.Length</h4>
+        <h4>Participants:</h4>
+        <ul>
+            @foreach(Attending guest in @Model.NewHappening.GuestsAttending)
+            {
+                <li>@guest.User.FirstName @guest.User.LastName</li>
+            }
+        </ul>
+    </div>
+</body>
+</html>
